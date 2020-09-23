@@ -1,0 +1,15 @@
+{
+    "ApplicationName":"NEPTemplate",
+    "Description":"Base Template Application for creating webservices using Powershell",
+    "HTTPPort":"8080",
+    "SSLPort":"443",
+    "CookieSecret":"1234567890",
+    "CookieMaxAge":"300000",
+    "PrivateKey":"\\cert\\key.pem",
+    "Certificate":"\\cert\\cert.pem",
+    "CertificatePassword":"password",
+    "AuthenticationEnabled":"TRUE",
+    "AuthenticationMethod":"\\ps1\\auth\\userdb.ps1",
+    "AuthenticatedRedirectPage":"/index.html",
+    "DatabaseLocation":"db.sqlite"
+}
