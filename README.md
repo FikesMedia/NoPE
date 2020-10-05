@@ -1,5 +1,5 @@
 # NoPE
- Node PowerShell Web Server using Express. Should you do this, NoPE, hence the name. This is verry much under development and should not be used in any production environment. 
+ Node PowerShell Web Server using Express. Should you do this, NoPE, hence the name. This is very much under development and should not be used in any production environment. 
 
 # Installation
 ### Requirements
