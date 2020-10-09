@@ -2,7 +2,6 @@ var debugMode = 0;
 
 $(document).ready(function(){
 
-
     $("#form-signin").submit(function(e){
         // Clear Message 
         document.getElementById("loginMessage").innerHTML = "&nbsp;";
@@ -31,7 +30,6 @@ $(document).ready(function(){
         //
         // END Create Json Object from Form Data
         //
-        
         
         var formData = JSON.stringify($(this).serializeObject());
 
@@ -62,8 +60,6 @@ $(document).ready(function(){
                 console.log(errorThrown);
             }
         });
-
     });
-
 
 });
