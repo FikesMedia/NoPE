@@ -1,6 +1,5 @@
 # Ignore Node_Modules
 /node_modules
 /.vscode
-.gitignore
 .gitattributes
 sessionStore.db
