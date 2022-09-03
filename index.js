@@ -62,46 +62,6 @@ app.get('/', function(req, res){
 //
 //
 
-/*
-// Login Authentication
-app.post('/ps1/auth/:script', function(req, res) {
-	console.log(req.params);
-
-    const script = req.params.script;
-	const psparams = JSON.stringify(req.body);
-	
-	let ps1 = new shell({
-		executionPolicy: 'Bypass',
-		noProfile: true
-	});
-	
-	ps1.addCommand(process.cwd()+'\\ps1\\auth\\' + script + ' -JSON \'' + psparams + '\'');
-	ps1.invoke()
-	.then(output => {
-		// Check if credentials valid
-		var outputJSON = JSON.parse(output);
-		if (outputJSON.Credentials == "Valid"){
-			const cookie = require('./includes/cookies.js');
-			cookie.setAuthenticatedCookie(psparams);
-	
-			req.session.Username = psparams.Username;
-
-
-
-		} else {
-			const cookie = require('./includes/cookies.js');
-			cookie.expireAuthenticatedCookie(psparams);
-		}
-		res.send(output);
-	})
-	.catch(err => {
-		console.log("Failed Execution");
-		console.log(err);
-		res.send(err);
-		ps1.dispose();
-	});
-});
-*/
 
 //
 // Config Based Authentication
@@ -110,7 +70,6 @@ app.post('/authenticate', function(req, res) {
 	console.log(req.params);
 	console.log(req.session.id);
 	const sessionID = req.session.id;
-    //const script = req.params.script;
 	const psparams = JSON.stringify(req.body);
 	
 	let ps1 = new shell({
@@ -124,19 +83,12 @@ app.post('/authenticate', function(req, res) {
 		// Check if credentials valid
 		var outputJSON = JSON.parse(output);
 		if (outputJSON.Credentials == "Valid"){
-			//const cookie = require('./includes/cookies.js');
-			//cookie.setAuthenticatedCookie(psparams);
-			//req.session.Username = psparams.Username;
-
+			req.session.Username = psparams.Username;
 			// Valid Session, Set Authenticated Cookie Session
 			saveLoginInformation(sessionID, psparams, req);
-
 		} else {
-			//const cookie = require('./includes/cookies.js');
-			//cookie.expireAuthenticatedCookie(psparams);
-
 		}
-
+		ps1.dispose();
 		res.send(output);
 	})
 	.catch(err => {
@@ -149,6 +101,7 @@ app.post('/authenticate', function(req, res) {
 //
 // END Config Based Login
 //
+
 
 
 //
@@ -167,6 +120,7 @@ app.get('/ps1/get/:script', function(req, res) {
 	ps1.addCommand(process.cwd()+'\\ps1\\get\\' + script + ' -JSON \'' + psparams + '\'');
 	ps1.invoke()
 	.then(output => {
+		ps1.dispose();
 		res.send(output);
 	})
 	.catch(err => {
@@ -201,6 +155,7 @@ app.post('/ps1/post/:script', function(req, res) {
 	ps1.addCommand(process.cwd()+'\\ps1\\post\\' + script + ' -JSON \'' + psparams + '\'');
 	ps1.invoke()
 	.then(output => {
+		ps1.dispose();
 		res.send(output);
 	})
 	.catch(err => {
